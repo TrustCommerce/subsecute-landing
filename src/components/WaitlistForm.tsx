@@ -57,15 +57,15 @@ export default function WaitlistForm({ variant = 'dark' }: WaitlistFormProps) {
   }
 
   return (
-    <div className="flex w-full max-w-[440px] flex-col items-center gap-2">
-      <form onSubmit={handleSubmit} className="flex w-full flex-col items-center gap-3 sm:flex-row">
+    <div className="flex w-full max-w-[440px] flex-col items-center gap-2 px-4 sm:px-0">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center">
         <input
           type="email"
           required
           value={email}
           onChange={(e) => { setEmail(e.target.value); if (status === 'error') setStatus('idle') }}
           placeholder="Enter your email"
-          className={`h-12 w-full flex-1 rounded-full px-5 font-outfit text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#E96D1F] ${
+          className={`h-12 w-full min-w-0 rounded-full px-5 font-outfit text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#E96D1F] sm:flex-1 ${
             isDark
               ? 'bg-white/10 text-white placeholder-white/50 border border-white/20'
               : 'bg-white text-[#232323] placeholder-[#ADB5BD] border border-[#DEE2E6]'
@@ -74,7 +74,7 @@ export default function WaitlistForm({ variant = 'dark' }: WaitlistFormProps) {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="h-12 shrink-0 rounded-full bg-[#232323] px-6 font-outfit text-sm font-medium tracking-wide text-white transition-opacity hover:opacity-90 disabled:opacity-60 sm:px-7"
+          className="h-12 w-full shrink-0 rounded-full bg-[#232323] px-6 font-outfit text-sm font-medium tracking-wide text-white transition-opacity hover:opacity-90 disabled:opacity-60 sm:w-auto sm:px-7"
         >
           {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
         </button>

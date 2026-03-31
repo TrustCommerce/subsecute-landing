@@ -15,15 +15,17 @@ const TRANSITION_MS = 220 // how long the transition takes
 const CARD_H = 48
 const GAP = 8
 const POSES = [
-  { y: -(CARD_H + GAP), scale: 0.92, z: 10, opacity: 0.4 },  // above (done, fading out)
-  { y: 0, scale: 1, z: 30, opacity: 1 },                      // center (main, prominent)
-  { y: CARD_H + GAP, scale: 0.92, z: 10, opacity: 0.4 }       // below (queued, waiting)
+  { y: -(CARD_H + GAP), scale: 0.90, z: 5, opacity: 0 },      // above (exiting, faded out)
+  { y: 0, scale: 1, z: 30, opacity: 1 },                       // center (main, prominent)
+  { y: CARD_H + GAP, scale: 0.94, z: 15, opacity: 0.5 },       // below (next up)
+  { y: (CARD_H + GAP) * 2, scale: 0.88, z: 5, opacity: 0 }     // far below (queued, hidden)
 ] as const
 
 const ORDERS = [
-  [0, 1, 2],
-  [1, 2, 0],
-  [2, 0, 1]
+  [0, 1, 2, 3],
+  [1, 2, 3, 0],
+  [2, 3, 0, 1],
+  [3, 0, 1, 2]
 ] as const
 
 const SUBS = [
@@ -56,6 +58,16 @@ const SUBS = [
     statusBg: 'bg-[rgba(239,35,60,0.17)]',
     statusColor: 'text-[#EF233C]',
     dotColor: 'bg-[#EF233C]'
+  },
+  {
+    logo: logoUrl('claude.ai'),
+    name: 'Claude Pro',
+    daysLeft: '9 days left',
+    price: '$20',
+    status: 'Active' as const,
+    statusBg: 'bg-[rgba(88,220,0,0.2)]',
+    statusColor: 'text-[#49B500]',
+    dotColor: 'bg-[#58DC00]'
   }
 ] as const
 
@@ -116,7 +128,7 @@ function SubscriptionListUI() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setStep((s) => (s + 1) % 3)
+      setStep((s) => (s + 1) % 4)
     }, HOLD_MS + TRANSITION_MS)
     return () => clearInterval(interval)
   }, [])
@@ -126,7 +138,7 @@ function SubscriptionListUI() {
   return (
     <div className="relative h-[180px] overflow-hidden rounded-xl border border-[#DEE2E6] bg-[#FFFEEC] p-3 shadow-[inset_0px_2px_10px_rgba(0,0,0,0.1)]">
       {SUBS.map((sub, i) => {
-        const poseIndex = order.indexOf(i as 0 | 1 | 2)
+        const poseIndex = order.indexOf(i as 0 | 1 | 2 | 3)
         return <SubCard key={sub.name} sub={sub} pose={POSES[poseIndex]} />
       })}
     </div>
