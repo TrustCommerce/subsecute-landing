@@ -387,10 +387,10 @@ function FundingUI() {
     <div className="flex items-end gap-3">
       <div className="flex flex-1 flex-col gap-1 rounded-xl border border-[rgba(233,109,31,0.1)] bg-[#252525] px-3 py-2 shadow-[0px_2px_10px_rgba(155,155,155,0.08)]">
         <span className="font-outfit text-[10px] tracking-wider text-[#ADB5BD]">
-          Your funding link:
+          Your gift link:
         </span>
         <span className="font-outfit text-xs font-medium tracking-wide text-white">
-          subsecute.com/fund/spotify-adaeze
+          app.subsecute.com/gift/adaeze
         </span>
       </div>
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[rgba(233,109,31,0.1)]">
@@ -543,9 +543,9 @@ export default function FeaturesSection() {
           {/* Card 5: Funding */}
           <article className="flex flex-col gap-10 overflow-hidden rounded-3xl border border-[rgba(233,109,31,0.3)] bg-[#202020] p-5 lg:gap-14 lg:p-6">
             <div className="flex flex-col gap-4">
-              <FeatureTag number="05" tag="FUNDING" light />
+              <FeatureTag number="05" tag="GIFTING" light />
               <h3 className="max-w-[324px] font-outfit text-xl font-semibold leading-[1.2em] tracking-wide text-[#F7F8F9] lg:text-2xl">
-                Ask anyone to fund your sub.
+                Ask anyone to gift your sub.
               </h3>
               <p className="font-outfit text-sm leading-[1.2em] tracking-wide text-[#ADB5BD]">
                 Generate a link. Someone pays. It lands on your subscription

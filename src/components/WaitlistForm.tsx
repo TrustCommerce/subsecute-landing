@@ -65,7 +65,7 @@ export default function WaitlistForm({ variant = 'dark' }: WaitlistFormProps) {
           value={email}
           onChange={(e) => { setEmail(e.target.value); if (status === 'error') setStatus('idle') }}
           placeholder="Enter your email"
-          className={`h-12 w-full min-w-0 rounded-full px-5 font-outfit text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#E96D1F] sm:flex-1 ${
+          className={`h-12 w-full min-w-0 rounded-full px-5 text-center font-outfit text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#E96D1F] sm:text-left sm:flex-1 ${
             isDark
               ? 'bg-white/10 text-white placeholder-white/50 border border-white/20'
               : 'bg-white text-[#232323] placeholder-[#ADB5BD] border border-[#DEE2E6]'
