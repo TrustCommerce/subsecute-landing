@@ -33,9 +33,7 @@ function RatingDots({ filled = 5 }: { filled?: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={i}
-          className={`h-3 w-3 rounded-full ${
-            i < filled ? 'bg-[#E96D1F]' : 'bg-[#DEE2E6]'
-          }`}
+          className={`h-3 w-3 rounded-full ${i < filled ? 'bg-[#E96D1F]' : 'bg-[#DEE2E6]'}`}
         />
       ))}
     </div>
@@ -54,9 +52,7 @@ function TestimonialCard({ testimonial }: { testimonial: (typeof TESTIMONIALS)[n
           <div
             className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${testimonial.color}`}
           >
-            <span className="font-outfit text-sm font-bold text-white">
-              {testimonial.initial}
-            </span>
+            <span className="font-outfit text-sm font-bold text-white">{testimonial.initial}</span>
           </div>
           <cite className="font-outfit text-sm font-semibold not-italic tracking-wide text-[#495057]">
             {testimonial.name}
@@ -116,10 +112,7 @@ export default function SocialProofSection() {
   }, [])
 
   return (
-    <section
-      aria-labelledby="social-proof-heading"
-      className="bg-[#FFFEEC] py-16 lg:py-20"
-    >
+    <section aria-labelledby="social-proof-heading" className="bg-[#FFFEEC] py-16 lg:py-20">
       <div className="mx-auto max-w-[1240px] px-4 lg:px-0">
         {/* Header */}
         <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-start lg:justify-between">
@@ -166,7 +159,13 @@ export default function SocialProofSection() {
             className="absolute -left-4 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-[#DEE2E6] bg-white p-2 shadow-sm transition-all hover:bg-[#F8F9FA] active:scale-95 lg:flex"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M12 5L7 10L12 15" stroke="#232323" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M12 5L7 10L12 15"
+                stroke="#232323"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
           <button
@@ -175,7 +174,13 @@ export default function SocialProofSection() {
             className="absolute -right-4 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-[#DEE2E6] bg-white p-2 shadow-sm transition-all hover:bg-[#F8F9FA] active:scale-95 lg:flex"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M8 5L13 10L8 15" stroke="#232323" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M8 5L13 10L8 15"
+                stroke="#232323"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </div>

@@ -25,10 +25,7 @@ const FOOTER_LINKS = [
 
 export default function Footer() {
   return (
-    <footer
-      aria-label="Site footer"
-      className="bg-[#202020] py-14 lg:py-[72px]"
-    >
+    <footer aria-label="Site footer" className="bg-[#202020] py-14 lg:py-[72px]">
       <div className="mx-auto flex max-w-[1240px] flex-col gap-10 px-4 lg:flex-row lg:items-start lg:justify-between lg:gap-[90px] lg:px-0">
         {/* Left column */}
         <div className="flex max-w-[420px] flex-col gap-6">
@@ -39,16 +36,13 @@ export default function Footer() {
             loading="lazy"
           />
           <p className="font-outfit text-sm leading-[1.5em] tracking-wide text-[#ADB5BD] lg:text-base">
-            Subscribe without the surprises. Virtual USD cards for your
-            subscriptions, funded automatically from your naira wallet.
+            Every recurring payment, on autopilot. Virtual USD cards for subscriptions. Automatic
+            bill pay for airtime, data, power, and cable.
           </p>
         </div>
 
         {/* Link columns */}
-        <nav
-          aria-label="Footer navigation"
-          className="grid grid-cols-3 gap-8 lg:gap-16"
-        >
+        <nav aria-label="Footer navigation" className="grid grid-cols-3 gap-8 lg:gap-16">
           {FOOTER_LINKS.map((column) => (
             <div key={column.heading} className="flex flex-col gap-1.5">
               <h3 className="pb-2 font-outfit text-xs font-medium tracking-wide text-white lg:text-sm">
@@ -59,7 +53,9 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      {...(link.href.endsWith('.html') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      {...(link.href.endsWith('.html')
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
                       className="block py-1.5 font-outfit text-xs tracking-wide text-[#ADB5BD] transition-colors hover:text-white lg:text-sm"
                     >
                       {link.label}

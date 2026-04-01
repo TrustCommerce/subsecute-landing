@@ -6,7 +6,9 @@ function useInView(ref: React.RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (!ref.current) return
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true) },
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true)
+      },
       { threshold: 0.4 }
     )
     observer.observe(ref.current)
@@ -37,27 +39,27 @@ function useCountUp(target: number, duration: number, active: boolean, delay: nu
 // Each stat has its own animation config
 const ANIMATED_STATS = [
   {
-    targets: [60],
-    format: (vals: number[]) => `${vals[0]}%+`,
-    label: 'Of Nigerian international card payments fail due to bank limits and FX restrictions',
+    targets: [5],
+    format: (vals: number[]) => `${vals[0]} min`,
+    label: 'From download to your first automated payment',
     delay: 0
   },
   {
     targets: [15, 30],
     format: (vals: number[]) => `$${vals[0]}-${vals[1]}`,
-    label: 'Average monthly foreign subscription spend per Nigerian user',
+    label: 'Average monthly subscription spend per Nigerian user',
     delay: 200
   },
   {
-    targets: [5],
-    format: (vals: number[]) => `${vals[0]} min`,
-    label: 'From download to your first active, auto-renewing subscription',
+    targets: [50],
+    format: (vals: number[]) => `${vals[0]}+`,
+    label: 'Supported subscription and bill providers',
     delay: 400
   },
   {
-    targets: [99],
-    format: (vals: number[]) => `${vals[0]}%+`,
-    label: 'Payment success rate across 50+ supported providers',
+    targets: [0],
+    format: (vals: number[]) => `${vals[0]}`,
+    label: 'Failed renewals when auto-funding is on',
     delay: 600
   }
 ] as const
@@ -69,9 +71,7 @@ function AnimatedStat({
   stat: (typeof ANIMATED_STATS)[number]
   active: boolean
 }) {
-  const values = stat.targets.map((t, i) =>
-    useCountUp(t, 1200, active, stat.delay + i * 100)
-  )
+  const values = stat.targets.map((t, i) => useCountUp(t, 1200, active, stat.delay + i * 100))
 
   return (
     <div className="flex flex-col">
@@ -88,38 +88,20 @@ function AnimatedStat({
 const FEATURES = [
   {
     icon: '/images/landing/about-icon-1.svg',
-    title: 'All subscriptions in one place',
-    description: 'Track manage and control every sub independently'
+    title: 'One card per subscription',
+    description:
+      'Each subscription gets its own virtual USD card. Cancel one without touching the rest.'
   },
   {
     icon: '/images/landing/about-icon-2.svg',
-    title: 'One dedicated USD card per subscription',
-    description: 'Track manage and control every sub independently'
+    title: 'Auto-pay your bills',
+    description: 'Airtime, data, power, cable — set it once, it renews every month.'
   },
   {
     icon: '/images/landing/about-icon-3.svg',
     title: 'Auto-funded before renewal',
     description:
-      'Your naira card or wallet funds each subscription automatically'
-  }
-] as const
-
-const STATS = [
-  {
-    value: '60%+',
-    label: 'Of Nigerian international card payments fail due to bank limits and FX restrictions'
-  },
-  {
-    value: '$15-30',
-    label: 'Average monthly foreign subscription spend per Nigerian user'
-  },
-  {
-    value: '5 min',
-    label: 'From download to your first active, auto-renewing subscription'
-  },
-  {
-    value: '99%+',
-    label: 'Payment success rate across 50+ supported providers'
+      'Your wallet funds each card automatically before the charge hits. No failed payments.'
   }
 ] as const
 
@@ -128,11 +110,7 @@ export default function AboutSection() {
   const statsInView = useInView(statsRef)
 
   return (
-    <section
-      id="about"
-      aria-labelledby="about-heading"
-      className="bg-[#141414] py-20 lg:py-24"
-    >
+    <section id="about" aria-labelledby="about-heading" className="bg-[#141414] py-20 lg:py-24">
       <div className="mx-auto flex max-w-[1240px] flex-col gap-14 px-4 lg:flex-row lg:gap-12 lg:px-0">
         {/* Left column */}
         <div className="flex flex-col gap-10 lg:max-w-[612px] lg:gap-12">
@@ -145,15 +123,17 @@ export default function AboutSection() {
               id="about-heading"
               className="font-outfit text-3xl leading-[1.2em] text-white sm:text-4xl lg:text-[48px]"
             >
-              The subscription infrastructure{' '}
-              <span className="text-[#E96D1F]">Nigerians</span> actually needed.
+              One virtual card per subscription. One app for every bill in Nigeria.
             </h2>
+            <p className="font-outfit text-lg italic leading-[1.5em] tracking-wide text-white/80 sm:text-xl">
+              The best subscription is one you never think about.
+            </p>
             <p className="font-outfit text-sm leading-[1.5em] tracking-wide text-[#CED4DA] sm:text-base">
-              Paying for subscription in USD shouldn&apos;t mean constant
-              payment failures, shared dollar cards, and card terminations.
-              Subsecute gives every single subscription its own dedicated
-              virtual USD card, funded automatically from your naira wallet,
-              renewed on time, every time.
+              Your bank card gets declined on Netflix. Your DSTV expires because you forgot to
+              renew. Your data runs out at midnight. Subsecute fixes all of it — a dedicated USD
+              card for each subscription that auto-funds before renewal, and scheduled payments for
+              airtime, data, power, and cable that just run. Living abroad? Manage your
+              family&apos;s bills from anywhere.
             </p>
           </div>
 
@@ -187,7 +167,10 @@ export default function AboutSection() {
         </div>
 
         {/* Right column — Stats + Testimonial */}
-        <div ref={statsRef} className="flex flex-1 flex-col gap-6 rounded-3xl bg-[#1D1D1D] p-6 sm:p-8 lg:gap-8 lg:p-10">
+        <div
+          ref={statsRef}
+          className="flex flex-1 flex-col gap-6 rounded-3xl bg-[#1D1D1D] p-6 sm:p-8 lg:gap-8 lg:p-10"
+        >
           {/* Stats grid */}
           <div className="border-b border-[#2F2F2F] pb-8">
             <div className="grid grid-cols-2 gap-x-4 gap-y-8">
@@ -201,8 +184,8 @@ export default function AboutSection() {
           {!IS_WAITLIST && (
             <div className="flex flex-col gap-3">
               <blockquote className="font-outfit text-sm leading-[1.5em] tracking-wide text-white">
-                &ldquo;I haven&apos;t thought about my subscriptions since I
-                switched to Subsecute. It just works, every single month.&rdquo;
+                &ldquo;I haven&apos;t thought about my subscriptions since I switched to Subsecute.
+                It just works, every single month.&rdquo;
               </blockquote>
               <div className="flex items-center gap-2 py-1">
                 <img

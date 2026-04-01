@@ -7,7 +7,7 @@ function logoUrl(domain: string) {
 import React, { useEffect, useState } from 'react'
 
 // --- Tunable constants ---
-const HOLD_MS = 800       // how long each state holds
+const HOLD_MS = 800 // how long each state holds
 const TRANSITION_MS = 220 // how long the transition takes
 
 // Vertical stack: queued below → main center → queued above (after serving)
@@ -15,10 +15,10 @@ const TRANSITION_MS = 220 // how long the transition takes
 const CARD_H = 48
 const GAP = 8
 const POSES = [
-  { y: -(CARD_H + GAP), scale: 0.90, z: 5, opacity: 0 },      // above (exiting, faded out)
-  { y: 0, scale: 1, z: 30, opacity: 1 },                       // center (main, prominent)
-  { y: CARD_H + GAP, scale: 0.94, z: 15, opacity: 0.5 },       // below (next up)
-  { y: (CARD_H + GAP) * 2, scale: 0.88, z: 5, opacity: 0 }     // far below (queued, hidden)
+  { y: -(CARD_H + GAP), scale: 0.9, z: 5, opacity: 0 }, // above (exiting, faded out)
+  { y: 0, scale: 1, z: 30, opacity: 1 }, // center (main, prominent)
+  { y: CARD_H + GAP, scale: 0.94, z: 15, opacity: 0.5 }, // below (next up)
+  { y: (CARD_H + GAP) * 2, scale: 0.88, z: 5, opacity: 0 } // far below (queued, hidden)
 ] as const
 
 const ORDERS = [
@@ -71,13 +71,7 @@ const SUBS = [
   }
 ] as const
 
-function SubCard({
-  sub,
-  pose
-}: {
-  sub: (typeof SUBS)[number]
-  pose: (typeof POSES)[number]
-}) {
+function SubCard({ sub, pose }: { sub: (typeof SUBS)[number]; pose: (typeof POSES)[number] }) {
   return (
     <div
       className="absolute inset-x-0 flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-[0px_2px_8px_rgba(0,0,0,0.1)]"
@@ -90,31 +84,17 @@ function SubCard({
       }}
     >
       <div className="flex items-center gap-2">
-        <img
-          src={sub.logo}
-          alt={sub.name}
-          className="h-8 w-8 shrink-0 rounded-md object-cover"
-        />
+        <img src={sub.logo} alt={sub.name} className="h-8 w-8 shrink-0 rounded-md object-cover" />
         <div className="flex flex-col">
-          <span className="font-dm-sans text-sm font-semibold text-[#232323]">
-            {sub.name}
-          </span>
-          <span className="font-dm-sans text-[10px] text-[#6C757D]">
-            {sub.daysLeft}
-          </span>
+          <span className="font-dm-sans text-sm font-semibold text-[#232323]">{sub.name}</span>
+          <span className="font-dm-sans text-[10px] text-[#6C757D]">{sub.daysLeft}</span>
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <span className="font-dm-sans text-sm font-semibold text-[#232323]">
-          {sub.price}
-        </span>
-        <div
-          className={`flex items-center gap-1 rounded-full px-2 py-0.5 ${sub.statusBg}`}
-        >
+        <span className="font-dm-sans text-sm font-semibold text-[#232323]">{sub.price}</span>
+        <div className={`flex items-center gap-1 rounded-full px-2 py-0.5 ${sub.statusBg}`}>
           <div className={`h-1.5 w-1.5 rounded-full ${sub.dotColor}`} />
-          <span
-            className={`font-outfit text-[10px] tracking-wider ${sub.statusColor}`}
-          >
+          <span className={`font-outfit text-[10px] tracking-wider ${sub.statusColor}`}>
             {sub.status}
           </span>
         </div>
@@ -158,7 +138,9 @@ function useInView(ref: React.RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (!ref.current) return
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true) },
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true)
+      },
       { threshold: 0.5 }
     )
     observer.observe(ref.current)
@@ -190,7 +172,10 @@ function StatsUI() {
   const count = useCountUp(64, 1400, inView)
 
   return (
-    <div ref={ref} className="flex items-center justify-center rounded-3xl bg-white p-6 shadow-[0px_1px_6px_rgba(0,0,0,0.12)]">
+    <div
+      ref={ref}
+      className="flex items-center justify-center rounded-3xl bg-white p-6 shadow-[0px_1px_6px_rgba(0,0,0,0.12)]"
+    >
       <div className="relative h-[140px] w-[140px]">
         <svg viewBox="0 0 147 147" className="h-full w-full -rotate-90">
           {RINGS.map((ring) => (
@@ -212,9 +197,7 @@ function StatsUI() {
           ))}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-dm-sans text-xl font-semibold text-[#232323]">
-            ${count}/m
-          </span>
+          <span className="font-dm-sans text-xl font-semibold text-[#232323]">${count}/m</span>
           <span className="font-dm-sans text-[8px] font-medium text-[#979797]">
             3 Subscriptions
           </span>
@@ -236,9 +219,7 @@ function RemindersUI() {
               className="h-8 w-8 shrink-0 rounded-md object-cover"
             />
             <div className="flex flex-col">
-              <span className="font-dm-sans text-sm font-semibold text-[#232323]">
-                Netflix
-              </span>
+              <span className="font-dm-sans text-sm font-semibold text-[#232323]">Netflix</span>
               <span className="font-dm-sans text-[10px] text-[#6C757D]">
                 $18.00 Insufficient funds on sub
               </span>
@@ -266,18 +247,14 @@ function RemindersUI() {
             className="h-7 w-7 shrink-0 rounded-md object-cover"
           />
           <div className="flex flex-col">
-            <span className="font-dm-sans text-xs font-semibold text-[#232323]">
-              Spotify
-            </span>
+            <span className="font-dm-sans text-xs font-semibold text-[#232323]">Spotify</span>
             <span className="font-dm-sans text-[9px] text-[#6C757D]">
               $18.00 Sufficient funds on sub.
             </span>
           </div>
         </div>
         <div className="rounded-full bg-[rgba(233,109,31,0.1)] px-1.5 py-0.5">
-          <span className="font-outfit text-[7px] tracking-wider text-[#E96D1F]">
-            in 4 days
-          </span>
+          <span className="font-outfit text-[7px] tracking-wider text-[#E96D1F]">in 4 days</span>
         </div>
       </div>
     </div>
@@ -320,7 +297,9 @@ function PlansUI() {
                 className={`flex h-8 w-8 items-center justify-center rounded-full ${member.bg}`}
                 style={{
                   transition: 'box-shadow 0.25s ease',
-                  boxShadow: isActive ? `0 0 0 3px ${member.bg === 'bg-[#A63CD3]' ? 'rgba(166,60,211,0.25)' : member.bg === 'bg-[#E79438]' ? 'rgba(231,148,56,0.25)' : 'rgba(39,126,62,0.25)'}` : 'none'
+                  boxShadow: isActive
+                    ? `0 0 0 3px ${member.bg === 'bg-[#A63CD3]' ? 'rgba(166,60,211,0.25)' : member.bg === 'bg-[#E79438]' ? 'rgba(231,148,56,0.25)' : 'rgba(39,126,62,0.25)'}`
+                    : 'none'
                 }}
               >
                 <span className="font-dm-sans text-xs font-semibold text-white">
@@ -394,12 +373,7 @@ function FundingUI() {
         </span>
       </div>
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[rgba(233,109,31,0.1)]">
-        <img
-          src="/images/landing/funding-icon.svg"
-          alt=""
-          aria-hidden="true"
-          className="h-8 w-8"
-        />
+        <img src="/images/landing/funding-icon.svg" alt="" aria-hidden="true" className="h-8 w-8" />
       </div>
     </div>
   )
@@ -444,13 +418,13 @@ export default function FeaturesSection() {
         {/* Header */}
         <div className="mb-10 text-center lg:mb-14">
           <span className="font-outfit text-sm font-medium tracking-wide text-[#E96D1F]">
-            WHAT SUBSECUTE DOES
+            WHAT YOU GET
           </span>
           <h2
             id="features-heading"
             className="mx-auto mt-2 max-w-[641px] font-neue-power text-3xl font-bold leading-[1.2em] tracking-normal text-[#232323] sm:text-4xl lg:text-[48px]"
           >
-            Built around how you actually subscribe.
+            Virtual USD cards and automatic bill pay, in one app.
           </h2>
         </div>
 
@@ -463,12 +437,11 @@ export default function FeaturesSection() {
               <FeatureTag number="01" tag="MANAGE" />
               <div className="flex flex-col gap-1">
                 <h3 className="font-outfit text-lg font-medium leading-[1.2em] tracking-wide text-black lg:text-xl">
-                  Every subscription in one dashboard.
+                  Every payment in one dashboard.
                 </h3>
                 <p className="font-outfit text-sm leading-[1.3em] tracking-wide text-[#6C757D]">
-                  Netflix, Spotify, ChatGPT, Figma; add them all. See
-                  what&apos;s active, what&apos;s due, and what you&apos;ve
-                  spent.
+                  Netflix, Spotify, DSTV, airtime, power — see what&apos;s active, what&apos;s due,
+                  and what you&apos;ve spent.
                 </p>
               </div>
             </div>
@@ -484,8 +457,7 @@ export default function FeaturesSection() {
                   Full visibility into what you spend
                 </h3>
                 <p className="font-outfit text-sm leading-[1.3em] tracking-wide text-[#6C757D]">
-                  Per-sub breakdowns, trends, and history so nothing ever
-                  catches you off guard.
+                  Per-sub breakdowns, trends, and history so nothing ever catches you off guard.
                 </p>
               </div>
             </div>
@@ -501,8 +473,7 @@ export default function FeaturesSection() {
                   Custom reminders.
                 </h3>
                 <p className="font-outfit text-sm leading-[1.3em] tracking-wide text-[#6C757D]">
-                  Choose how far in advance you get notified; 1 day, 3 days, or
-                  7. Per subscription.
+                  Choose how far in advance you get notified; 1 day, 3 days, or 7. Per subscription.
                 </p>
               </div>
             </div>
@@ -521,11 +492,9 @@ export default function FeaturesSection() {
                     Create a plan for your team, friends, or family
                   </h3>
                   <p className="font-outfit text-sm leading-[1.5em] tracking-wide text-[#6C757D]">
-                    Build a subscription plan with one or more packages and
-                    invite members. Each person picks what they want and
-                    activates it on their end. All charges come back to you, and
-                    you stay in full control of who&apos;s in and what they
-                    access.
+                    Build a subscription plan with one or more packages and invite members. Each
+                    person picks what they want and activates it on their end. All charges come back
+                    to you, and you stay in full control of who&apos;s in and what they access.
                   </p>
                 </div>
               </div>
@@ -545,11 +514,11 @@ export default function FeaturesSection() {
             <div className="flex flex-col gap-4">
               <FeatureTag number="05" tag="GIFTING" light />
               <h3 className="max-w-[324px] font-outfit text-xl font-semibold leading-[1.2em] tracking-wide text-[#F7F8F9] lg:text-2xl">
-                Ask anyone to gift your sub.
+                Let anyone fund your subscriptions.
               </h3>
               <p className="font-outfit text-sm leading-[1.2em] tracking-wide text-[#ADB5BD]">
-                Generate a link. Someone pays. It lands on your subscription
-                balance. No bank transfer
+                Share a link. When someone pays, it tops up your wallet instantly. Perfect for
+                family abroad helping with bills back home.
               </p>
             </div>
             <FundingUI />

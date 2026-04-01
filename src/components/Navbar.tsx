@@ -18,7 +18,9 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = ''
     }
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [open])
 
   // Close on escape key
@@ -40,11 +42,7 @@ export default function Navbar() {
         className="relative z-50 mx-auto flex max-w-[1240px] items-center justify-between rounded-xl border border-[#DEE2E6] px-5 py-2.5"
       >
         <a href="/" aria-label="Subsecute home">
-          <img
-            src="/images/landing/logo.png"
-            alt="Subsecute logo"
-            className="h-8 w-auto"
-          />
+          <img src="/images/landing/logo.png" alt="Subsecute logo" className="h-8 w-auto" />
         </a>
 
         {/* Desktop nav */}
@@ -120,11 +118,7 @@ export default function Navbar() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[#F0F0F0] px-6 py-4">
           <a href="/" onClick={close}>
-            <img
-              src="/images/landing/logo.png"
-              alt="Subsecute"
-              className="h-7 w-auto"
-            />
+            <img src="/images/landing/logo.png" alt="Subsecute" className="h-7 w-auto" />
           </a>
           <button
             onClick={close}
@@ -132,7 +126,12 @@ export default function Navbar() {
             className="flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-[#F0F0F0]"
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4 4L14 14M14 4L4 14" stroke="#232323" strokeWidth="1.5" strokeLinecap="round" />
+              <path
+                d="M4 4L14 14M14 4L4 14"
+                stroke="#232323"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
             </svg>
           </button>
         </div>

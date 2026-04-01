@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative h-[713px] overflow-hidden bg-[#FFFEEC] sm:h-[813px] md:h-[855px] lg:h-[972px]"
+      className="relative h-[749px] overflow-hidden bg-[#FFFEEC] sm:h-[854px] md:h-[898px] lg:h-[1021px]"
     >
       {/* Orange blur */}
       <div
@@ -42,24 +42,35 @@ export default function HeroSection() {
             />
           </div>
           <span className="font-outfit text-xs tracking-wide text-[#6C757D] sm:text-sm">
-            50+ Subscription providers
+            50+ Subscription and bill providers
           </span>
         </div>
 
-        {/* Heading */}
-        <h1
+        {/* Hidden SEO H1 — keyword-rich for crawlers */}
+        <h1 className="sr-only">
+          Automate Your Subscriptions and Bills in Nigeria — Virtual USD Cards and Recurring Bill
+          Pay for Netflix, Spotify, DSTV, Airtime, Data, and Power
+        </h1>
+        <p className="sr-only">
+          Subsecute is a recurring payment automation app for Nigerians. Pay for Netflix, Spotify,
+          ChatGPT, and 50+ international subscriptions with dedicated virtual USD cards funded from
+          your Naira wallet. Auto-pay your airtime, data bundles, DSTV, GOtv, and power bills every
+          month. Cancel any subscription in one tap. Share plans with family and friends. The
+          easiest way to manage recurring payments in Nigeria.
+        </p>
+
+        {/* Visible creative heading */}
+        <div
+          aria-hidden="true"
           id="hero-heading"
           className="max-w-[822px] text-center font-neue-power leading-[1.15] tracking-normal text-[#232323]"
         >
           <span className="text-4xl font-bold sm:text-[40px] md:text-[49px] lg:text-[71px]">
-            Your subscriptions,
+            Your bills run themselves.
           </span>
           <br />
-          <span className="text-4xl font-normal sm:text-[40px] md:text-[49px] lg:text-[71px]">
-            managed{' '}
-          </span>
           <span className="relative inline-block text-4xl font-bold text-[#E96D1F] sm:text-[40px] md:text-[49px] lg:text-[71px]">
-            properly.
+            You run your life.
             <svg
               className="absolute -bottom-1 left-0 w-full sm:-bottom-2"
               viewBox="0 0 400 16"
@@ -76,13 +87,12 @@ export default function HeroSection() {
               />
             </svg>
           </span>
-        </h1>
+        </div>
 
-        {/* Subtitle */}
+        {/* Subtitle — value prop flows into loss aversion as one thought */}
         <p className="mt-4 max-w-[540px] text-center font-outfit text-sm leading-[1.6em] tracking-wide text-[#6C757D] sm:text-base lg:mt-5 lg:text-lg">
-          One app to create, fund, and manage every subscription. USD Virtual
-          card generated and auto funded from your Naira card or wallet for each
-          subscription.
+          Auto-pay your Netflix, DSTV, airtime, data, and power. No more declined cards. No more
+          midnight data runs.
         </p>
 
         {/* CTA — switches based on launch mode */}

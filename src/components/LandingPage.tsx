@@ -16,7 +16,7 @@ const APP_SCHEMA = {
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'iOS, Android',
   description:
-    'Subscription management app for Nigerians. Create, fund, and manage every USD subscription with virtual cards auto-funded from your Naira wallet. Supports Netflix, Spotify, ChatGPT, and 50+ providers.',
+    'Automate your subscriptions and bills in Nigeria. Virtual USD cards for Netflix, Spotify, ChatGPT. Auto-pay airtime, data, power, DSTV.',
   url: 'https://subsecute.com',
   author: { '@type': 'Organization', name: 'Subsecute' },
   offers: {
@@ -28,6 +28,7 @@ const APP_SCHEMA = {
   featureList: [
     'Dedicated virtual USD card per subscription',
     'Auto-funding from Naira wallet',
+    'Recurring bill payments for airtime, data, power, and cable',
     'Subscription renewal reminders',
     'Spending analytics and tracking',
     'Family and team subscription plans',
@@ -44,7 +45,7 @@ const ORG_SCHEMA = {
   url: 'https://subsecute.com',
   logo: 'https://subsecute.com/images/landing/logo.png',
   description:
-    'Subscription management app for Nigerians. Virtual USD cards auto-funded from your Naira wallet.',
+    'Automate your subscriptions and bills in Nigeria. Virtual USD cards for subscriptions. Auto-pay airtime, data, power, and cable.',
   foundingLocation: { '@type': 'Place', name: 'Nigeria' },
   areaServed: { '@type': 'Country', name: 'Nigeria' },
   contactPoint: {
@@ -63,7 +64,7 @@ const FAQ_SCHEMA = {
       name: 'How do I pay for Netflix in Nigeria without my card being declined?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Subsecute creates a dedicated virtual USD card for your Netflix subscription, funded automatically from your Naira wallet. Unlike Nigerian bank cards that get declined due to CBN FX limits, Subsecute cards have a 99%+ payment success rate across 50+ subscription providers.'
+        text: 'Subsecute creates a dedicated virtual USD card for your Netflix subscription, funded automatically from your Naira wallet. Unlike Nigerian bank cards that often get declined, Subsecute cards work reliably across 50+ subscription providers.'
       }
     },
     {
@@ -71,7 +72,23 @@ const FAQ_SCHEMA = {
       name: 'What is Subsecute?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Subsecute is a subscription management app built for Nigerians. It gives you a unique virtual USD card for each subscription (Netflix, Spotify, ChatGPT, Figma, etc.) and auto-funds each card from your Naira wallet before renewal day.'
+        text: 'Subsecute is a recurring payment automation app built for Nigerians. It gives you a unique virtual USD card for each subscription (Netflix, Spotify, ChatGPT, Figma, etc.) and auto-pays your bills — airtime, data, power, and cable — all from one wallet.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I auto-pay my airtime, data, and DSTV through Subsecute?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Set up recurring payments for airtime, data bundles, power, and cable TV (DSTV, GOtv, Showmax). Pick the amount and schedule, and Subsecute handles it automatically every month.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can someone abroad manage bills for family in Nigeria?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Create a plan, add family members, and set up their airtime, data, and cable to renew automatically. You see every payment in your dashboard. No more sending money and hoping it gets used right.'
       }
     },
     {
@@ -79,15 +96,15 @@ const FAQ_SCHEMA = {
       name: 'How is Subsecute different from Grey.co or Chipper Cash?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Unlike general-purpose dollar cards, Subsecute is purpose-built for subscriptions. Each subscription gets its own dedicated card, auto-funded before renewal, with reminders and spend tracking. You never have to manually top up or worry about a failed charge."
+        text: 'Unlike general-purpose dollar cards, Subsecute is purpose-built for recurring payments. Each subscription gets its own dedicated card, auto-funded before renewal, with reminders and spend tracking. Plus, Subsecute also handles local bill payments — airtime, data, power, and cable — so everything recurring lives in one place.'
       }
     },
     {
       '@type': 'Question',
-      name: 'What subscriptions does Subsecute support?',
+      name: 'What subscriptions and bills does Subsecute support?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Subsecute works with 50+ providers including Netflix, Spotify, Apple Music, YouTube Premium, ChatGPT Plus, Figma, Canva, Adobe Creative Cloud, Amazon Prime, and more.'
+        text: 'Subsecute works with 50+ providers including Netflix, Spotify, Apple Music, YouTube Premium, ChatGPT Plus, Figma, Canva, Adobe Creative Cloud, Amazon Prime, and more. For bills, you can automate airtime, data, power (prepaid and postpaid), and cable TV (DSTV, GOtv, Showmax).'
       }
     },
     {
@@ -95,7 +112,31 @@ const FAQ_SCHEMA = {
       name: 'How long does it take to set up Subsecute?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Under 5 minutes. Download the app, sign up, link your Naira debit card, create a subscription, and copy the generated USD card details to your provider's payment page."
+        text: 'Under 5 minutes. Download the app, sign up, fund your wallet, add your subscriptions and bills, and everything starts running on autopilot.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does Subsecute convert Naira to USD for my subscriptions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'When you fund your Subsecute wallet with Naira, the app handles the conversion at competitive rates. Each subscription gets its own USD virtual card that is automatically topped up before your renewal date.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Is Subsecute safe and licensed?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Subsecute operates in compliance with Nigerian financial regulations through partnerships with CBN-licensed entities. Your funds are held securely, and each virtual card is isolated per subscription so a compromise on one service cannot affect others.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use Subsecute for family or team subscription plans?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Subsecute lets you create plans where you invite family members or teammates. Each person picks their subscriptions, and all charges flow back to the plan owner.'
       }
     }
   ]
@@ -105,25 +146,25 @@ export default function LandingPage() {
   return (
     <>
       <Helmet>
-        <title>Subsecute — Your subscriptions, managed properly</title>
+        <title>Subsecute — Automate Your Subscriptions and Bills in Nigeria</title>
         <meta
           name="description"
-          content="One app to create, fund, and manage every USD subscription. Virtual USD cards auto-funded from your Naira card or wallet. 50+ providers supported. Download on iOS and Android."
+          content="Automate your subscriptions and bills in Nigeria. Virtual USD cards for Netflix, Spotify, ChatGPT. Auto-pay airtime, data, power, DSTV."
         />
         <meta
           name="keywords"
-          content="subscription management, USD virtual card, naira to dollar, Netflix subscription Nigeria, Spotify Nigeria, subscription payment, auto-renew subscription, virtual dollar card"
+          content="automate subscriptions Nigeria, virtual dollar card Nigeria, pay Netflix Nigeria, recurring bill payment Nigeria, auto-pay airtime Nigeria, USD virtual card, naira to dollar, Spotify Nigeria, subscription payment, DSTV auto-pay, data bundle auto-renew"
         />
         <link rel="canonical" href="https://subsecute.com" />
 
         {/* Open Graph */}
         <meta
           property="og:title"
-          content="Subsecute — Your subscriptions, managed properly"
+          content="Subsecute — Automate Your Subscriptions and Bills in Nigeria"
         />
         <meta
           property="og:description"
-          content="One app to create, fund, and manage every USD subscription. Virtual cards auto-funded from your Naira wallet."
+          content="Automate your subscriptions and bills in Nigeria. Virtual USD cards for subscriptions. Auto-pay airtime, data, power, DSTV."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://subsecute.com" />
@@ -138,11 +179,11 @@ export default function LandingPage() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Subsecute — Your subscriptions, managed properly"
+          content="Subsecute — Automate Your Subscriptions and Bills in Nigeria"
         />
         <meta
           name="twitter:description"
-          content="One app to create, fund, and manage every USD subscription. Virtual cards auto-funded from your Naira wallet."
+          content="Automate your subscriptions and bills in Nigeria. Virtual USD cards for subscriptions. Auto-pay airtime, data, power, DSTV."
         />
         <meta
           name="twitter:image"
@@ -150,15 +191,9 @@ export default function LandingPage() {
         />
 
         {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(APP_SCHEMA)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(ORG_SCHEMA)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(FAQ_SCHEMA)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(APP_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORG_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
       <main className="font-neue-power">

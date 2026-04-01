@@ -2,26 +2,25 @@ const STEPS = [
   {
     number: '01',
     title: 'Download & sign up',
-    description:
-      'Create your account, link your naira debit card. Your wallet is funded and ready in under 60 seconds.'
+    description: 'Create your account and fund your wallet. Ready in under 60 seconds.'
   },
   {
     number: '02',
-    title: 'Create a subscription',
+    title: 'Add your subscriptions and bills',
     description:
-      "Name your sub, set the amount and billing cycle. A virtual USD card is instantly generated and ready for you to use on the provider's platform."
+      'Add Netflix, Spotify, or any subscription. Set up recurring airtime, data, power, and cable payments.'
   },
   {
     number: '03',
-    title: 'Copy the card, use it',
+    title: 'We handle the rest',
     description:
-      'Copy the card details and enter them on Netflix, Spotify, or wherever. Your subscription is now live and linked.'
+      'Each subscription gets a virtual USD card. Bills pay on schedule. Everything auto-funds from your wallet.'
   },
   {
     number: '04',
-    title: 'It handles itself',
+    title: 'Cancel anything, anytime',
     description:
-      'Subsecute reminds you before each renewal and auto-funds the card from your naira wallet. No failed charges. Ever.'
+      "Freeze or kill any subscription with one tap. Pause a bill. You're always in control."
   }
 ] as const
 
@@ -37,18 +36,18 @@ export default function HowItWorksSection() {
         <div className="mb-12 flex flex-col gap-6 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex flex-col gap-4 lg:max-w-[461px]">
             <span className="font-outfit text-sm font-medium tracking-wide text-[#E96D1F]">
-              HOW SUBSECUTE WORKS
+              HOW IT WORKS
             </span>
             <h2
               id="how-it-works-heading"
               className="font-neue-power text-3xl font-bold leading-[1.2em] tracking-normal text-[#232323] sm:text-4xl lg:text-[48px]"
             >
-              Up and running in under 5 minutes
+              Automate your subscriptions and bills in 5 minutes
             </h2>
           </div>
           <p className="font-outfit text-base leading-[1.5em] tracking-wide text-[#232323] lg:max-w-[370px]">
-            Set it up once. Subsecute handles every renewal from there; funding,
-            reminders, the whole thing!
+            Set it up once. Subsecute handles every renewal from there — funding, reminders, the
+            whole thing!
           </p>
         </div>
 
@@ -58,9 +57,7 @@ export default function HowItWorksSection() {
             <article
               key={step.number}
               className={`flex flex-col gap-3 ${
-                index < STEPS.length - 1
-                  ? 'lg:border-r lg:border-[#CED4DA] lg:pr-8'
-                  : ''
+                index < STEPS.length - 1 ? 'lg:border-r lg:border-[#CED4DA] lg:pr-8' : ''
               } ${index > 0 ? 'lg:pl-8' : ''}`}
             >
               <span className="font-outfit text-base font-semibold tracking-wide text-[#E96D1F]">

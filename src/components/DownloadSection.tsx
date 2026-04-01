@@ -21,16 +21,14 @@ export default function DownloadSection() {
           id="download-heading"
           className="mb-4 text-center font-neue-power text-2xl font-bold leading-[1.15] tracking-normal text-white sm:text-4xl md:text-5xl lg:text-[64px]"
         >
-          {IS_WAITLIST
-            ? 'Be the first to know when we launch'
-            : 'The last time you look for a supported card'}
+          {IS_WAITLIST ? 'Be the first to automate everything' : 'Every recurring payment, handled'}
         </h2>
 
         {/* Subtitle */}
         <p className="mb-10 max-w-[600px] text-center font-outfit text-base leading-[1.5em] tracking-wide text-white/80 sm:text-lg lg:mb-12 lg:text-xl">
           {IS_WAITLIST
-            ? 'Join the waitlist and get early access. No spam, just a heads-up when Subsecute is ready for you.'
-            : 'Download Subsecute. Create your first subscription. Watch it renew on time, automatically, every month.'}
+            ? "Join the waitlist. We'll let you know when Subsecute is ready to handle your subscriptions and bills."
+            : 'Download Subsecute. Add your subscriptions and bills. Watch everything renew on time, automatically.'}
         </p>
 
         {/* CTA — switches based on launch mode */}
@@ -70,9 +68,7 @@ export default function DownloadSection() {
                 className="h-7 w-7"
               />
               <div className="flex flex-col justify-center">
-                <span className="font-outfit text-xs tracking-wide text-white/60">
-                  Get it on
-                </span>
+                <span className="font-outfit text-xs tracking-wide text-white/60">Get it on</span>
                 <span className="font-outfit text-base font-bold leading-[1.1em] tracking-wide text-white">
                   Google Play
                 </span>
