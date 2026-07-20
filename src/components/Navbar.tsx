@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback } from 'react'
 import { IS_WAITLIST } from '../config'
 
 const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Features', href: '#features' },
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'FAQ', href: '#faq' }
+  { label: 'About', href: '/#about' },
+  { label: 'Features', href: '/#features' },
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'FAQ', href: '/#faq' }
 ] as const
 
 export default function Navbar() {
@@ -60,7 +60,7 @@ export default function Navbar() {
             ))}
           </ul>
           <a
-            href="#download"
+            href="/#download"
             className="rounded-full bg-[#E96D1F] px-5 py-2 font-outfit text-sm font-medium tracking-wide text-white transition-opacity hover:opacity-90"
           >
             {IS_WAITLIST ? 'Join Waitlist' : 'Get the App'}
@@ -170,7 +170,7 @@ export default function Navbar() {
           {/* CTA */}
           <div className="mt-auto pt-6">
             <a
-              href="#download"
+              href="/#download"
               onClick={close}
               className="flex h-12 w-full items-center justify-center rounded-full bg-[#E96D1F] font-outfit text-sm font-medium tracking-wide text-white transition-opacity hover:opacity-90"
             >

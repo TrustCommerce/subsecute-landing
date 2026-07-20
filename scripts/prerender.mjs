@@ -9,7 +9,7 @@
  * to execute JavaScript, while users still get the full SPA experience.
  */
 
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 import { resolve } from 'path'
 
 const DIST = resolve('dist')
@@ -78,6 +78,10 @@ const SEO_CONTENT = `
 try {
   let html = readFileSync(indexPath, 'utf-8')
 
+  if (html.includes('<noscript>')) {
+    throw new Error('index.html already contains pre-rendered content — skipping to avoid duplication')
+  }
+
   // Insert SEO content just after <div id="root"></div>
   html = html.replace(
     '<div id="root"></div>',
@@ -88,4 +92,76 @@ try {
   console.log(`✓ Pre-rendered SEO content injected into index.html (${(html.length / 1024).toFixed(1)}KB)`)
 } catch (err) {
   console.log(`⚠ Pre-render failed: ${err.message}`)
+}
+
+// Emit a static /support page so the route returns real HTML with correct
+// meta tags even before JavaScript runs (required as a public support URL).
+const SUPPORT_TITLE = 'Support — Subsecute'
+const SUPPORT_DESCRIPTION =
+  'Need a hand with Subsecute? Email support@subsecute.com for help with billing, subscriptions, and your account. We reply within 1–2 business days.'
+
+const SUPPORT_SEO_CONTENT = `
+<noscript>
+  <div>
+    <h1>Support</h1>
+    <p>Need a hand with Subsecute? We're here to help.</p>
+    <p>The fastest way to reach us is email. Write to <a href="mailto:support@subsecute.com">support@subsecute.com</a> and we'll get back to you within 1–2 business days.</p>
+    <h2>What we can help with</h2>
+    <ul>
+      <li>Billing and payments</li>
+      <li>Managing your subscriptions and bills</li>
+      <li>Your account and access</li>
+    </ul>
+    <p>Subsecute is a product of TrustCommerce Resources Ltd (RC 7131175).</p>
+  </div>
+</noscript>`
+
+try {
+  let html = readFileSync(indexPath, 'utf-8')
+
+  // Swap out the injected home-page noscript block for the support one
+  const noscriptStart = html.indexOf('<noscript>')
+  const noscriptEnd = html.indexOf('</noscript>')
+  if (noscriptStart !== -1 && noscriptEnd !== -1) {
+    html = html.slice(0, noscriptStart) + html.slice(noscriptEnd + '</noscript>'.length)
+  }
+
+  html = html
+    .replace(/<title>[^<]*<\/title>/, `<title>${SUPPORT_TITLE}</title>`)
+    .replace(
+      /(<meta name="description" content=")[^"]*(")/,
+      `$1${SUPPORT_DESCRIPTION}$2`
+    )
+    .replace(
+      /(<link rel="canonical" href=")[^"]*(")/,
+      '$1https://subsecute.com/support$2'
+    )
+    .replace(
+      /(<meta property="og:title" content=")[^"]*(")/,
+      `$1${SUPPORT_TITLE}$2`
+    )
+    .replace(
+      /(<meta property="og:description" content=")[^"]*(")/,
+      `$1${SUPPORT_DESCRIPTION}$2`
+    )
+    .replace(
+      /(<meta property="og:url" content=")[^"]*(")/,
+      '$1https://subsecute.com/support$2'
+    )
+    .replace(
+      /(<meta name="twitter:title" content=")[^"]*(")/,
+      `$1${SUPPORT_TITLE}$2`
+    )
+    .replace(
+      /(<meta name="twitter:description" content=")[^"]*(")/,
+      `$1${SUPPORT_DESCRIPTION}$2`
+    )
+    .replace('<div id="root"></div>', `<div id="root"></div>${SUPPORT_SEO_CONTENT}`)
+
+  const supportDir = resolve(DIST, 'support')
+  mkdirSync(supportDir, { recursive: true })
+  writeFileSync(resolve(supportDir, 'index.html'), html)
+  console.log('✓ Pre-rendered static /support page (dist/support/index.html)')
+} catch (err) {
+  console.log(`⚠ Support pre-render failed: ${err.message}`)
 }
